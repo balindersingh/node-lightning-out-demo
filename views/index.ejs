@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="<%= process.env.SF_MY_DOMAIN %>/lightning/lightning.out.js"></script>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <div id="lightningout"></div>
+    <script>
+      $Lightning.use(
+        '<%= process.env.LIGHTNING_DEPENDENCY_APP %>', // name of the Lightning app i.e. c:myLightOutApp
+        function () {
+          // Callback once framework and app loaded
+          $Lightning.createComponent(
+            '<%= process.env.LWC_CMP %>', // top-level component of your app i.e. c:myLightOut
+            {}, // attributes to set on the component when created
+            'lightningout', // the DOM location to insert the component
+            function (cmp) {
+              // callback when component is created and active on the page
+            }
+          );
+        },
+        '<%= process.env.EXPEREINCE_SITE_URL %>' // Site endpoint i.e. https://my-dev-site.my.site.com/lightout
+      );
+    </script>
+  </body>
+</html>
